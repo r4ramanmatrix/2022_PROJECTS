@@ -467,7 +467,7 @@ public class Practice_34 {
 
 	public static void main(String[] args) {
 		String str1 = "learning";
-		String str2 = " lets  start the   learning  ";
+		String str2 = " lets  start the   learning  the";
 		String str3 = " lets  starT tHe   lEARNing  ";
 		String[] arr1 = str2.replaceAll("\\s+", " ").trim().split(" ");
 		String[] arr2 = str3.replaceAll("\\s+", " ").trim().split(" ");
