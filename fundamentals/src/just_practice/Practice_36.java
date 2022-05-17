@@ -187,8 +187,7 @@ public class Practice_36 implements Cloneable {
 	}
 
 	public void m10(int[] num) {
-		int c=10;
-		System.out.println(Math.rint(c));
+		
 	}
 
 	public void m11(int[] num) {
