@@ -13,77 +13,74 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.Set;
 
-public class Practice_36 implements Cloneable {
+public class Practice_37 {
 
 	public void m1(String str) {
 		System.out.println("String after reverse:: ");
-		System.out.println("Approach 1::");
-		String revStr = "";
+		String rev = "";
 		for (int i = str.length() - 1; i >= 0; i--) {
-			revStr = revStr + str.charAt(i);
+			rev = rev + str.charAt(i);
 		}
-		System.out.println(revStr);
+		System.out.println("Approach 1:: " + rev);
 
-		System.out.println("Approach 2::");
 		char[] ch = str.toCharArray();
+		System.out.print("Approach 2:: ");
 		for (int i = ch.length - 1; i >= 0; i--) {
 			System.out.print(ch[i]);
 		}
-		System.out.println("\nApproach 3::");
+
 		StringBuilder sb = new StringBuilder(str);
-		System.out.println(sb.reverse());
+		System.out.println("\nApproach 3:: " + sb.reverse());
 	}
 
 	public void m2(String str) {
 		System.out.println("String reverse on their position:: ");
-		String[] strRev = str.split(" ");
-		for (int i = 0; i < strRev.length; i++) {
-			for (int j = strRev[i].length() - 1; j >= 0; j--) {
-				System.out.print(strRev[i].charAt(j));
+		String[] sSplit = str.split(" ");
+		for (int i = 0; i < sSplit.length; i++) {
+			for (int j = sSplit[i].length() - 1; j >= 0; j--) {
+				System.out.print(sSplit[i].charAt(j));
 			}
 			System.out.print(" ");
 		}
 	}
 
 	public void m3(String str) {
-		System.out.println("\nNumber of character in a String :: ");
-		int count_char = 1;
-		int count_words = 1;
+		int count = 1;
+		int count_1 = 1;
 		for (int i = 0; i < str.length() - 1; i++) {
 			if ((str.charAt(i) != ' ') && (str.charAt(i + 1) != '\t')) {
-				count_char++;
+				count++;
 			}
 		}
-		System.out.println("Count of character in a String:: " + count_char);
+		System.out.println("\nNumber of characters in String:: " + count);
+
 		for (int i = 0; i < str.length() - 1; i++) {
 			if ((str.charAt(i) != ' ') && (str.charAt(i + 1) == ' ')) {
-				count_words++;
+				count_1++;
 			}
 		}
-		System.out.println("Count of words in a String:: " + count_words);
+		System.out.println("Count of words in a String:: " + count_1);
 	}
 
 	public void m4(String str) {
-		System.out.println("First and last word replace::");
+		System.out.println("Strings statement in reverse order:: ");
+		int i = str.length() - 1;
 		String result = "";
-		int len = str.length() - 1;
-		while (len >= 0) {
-			while (len >= 0 && str.charAt(len) == ' ')
-				len--;
-			int j = len;
-			if (len < 0) {
+		while (i >= 0) {
+			while (i >= 0 && str.charAt(i) == ' ')
+				i--;
+			int j = i;
+			if (i < 0) {
 				break;
 			}
-			while (len >= 0 && str.charAt(len) != ' ')
-				len--;
-
+			while (i >= 0 && str.charAt(i) != ' ')
+				i--;
 			if (result.isEmpty()) {
-				result = result.concat(str.substring(1 + len, 1 + j));
+				result = result.concat(str.substring(1 + i, 1 + j));
 			} else {
-				result = result.concat(" " + str.substring(1 + len, 1 + j));
+				result = result.concat(" " + str.substring(1 + i, 1 + j));
 			}
 		}
 		System.out.println(result);
@@ -93,8 +90,8 @@ public class Practice_36 implements Cloneable {
 		System.out.println("Find Duplicate character in a String using Map: ");
 		str = str.replaceAll(" ", "");
 		char[] ch = str.toCharArray();
+		Map<Character, Integer> cMap = new HashMap<>();
 		int count = 0;
-		Map<Character, Integer> cMap = new HashMap<Character, Integer>();
 		for (char c : ch) {
 			if (cMap.containsKey(c)) {
 				if (count < cMap.get(c)) {
@@ -117,38 +114,34 @@ public class Practice_36 implements Cloneable {
 	}
 
 	public void m6(String str) {
-		if (str == null || str.length() == 1) {
-			return;
-		}
-		str = str.replaceAll(" ", "");
-		Set<Character> cSet = new HashSet<>();
 		System.out.println("Find Duplicate character in a String using Set:: ");
+		str = str.replaceAll(" ", "");
 		char[] ch = str.toCharArray();
+		Set<Character> cSet = new HashSet<>();
 		for (char c : ch) {
 			if (cSet.add(c) == false) {
 				System.out.println(c);
 			}
 		}
-
 	}
 
 	public void m7(String str) {
 		System.out.println("Only Unqiue and non-repeated character in a String::");
-
 		for (int i = 0; i < str.length(); i++) {
-			boolean is_Unique = true;
+			boolean isUnique = true;
 			for (int j = 0; j < str.length(); j++) {
 				if (i != j && str.charAt(i) == str.charAt(j)) {
-					is_Unique = false;
+					isUnique = false;
 				}
 			}
-			if (is_Unique) {
+			if (isUnique) {
 				System.out.println(str.charAt(i));
 			}
 		}
 	}
 
 	public void m8(String str) {
+
 		String strFinal = "";
 		for (int i = 0; i < str.length(); i++) {
 			if (!strFinal.contains(String.valueOf(str.charAt(i)))) {
@@ -168,9 +161,10 @@ public class Practice_36 implements Cloneable {
 	}
 
 	public void m10(String str) {
-		char temp = 0;
-		str = str.replace(" ", "");
+
+		str = str.replaceAll(" ", "");
 		char[] ch = str.toCharArray();
+		char temp = 0;
 		for (int i = 0; i < ch.length; i++) {
 			for (int j = 0; j < ch.length - 1; j++) {
 				if (ch[j] > ch[j + 1]) {
@@ -197,17 +191,15 @@ public class Practice_36 implements Cloneable {
 
 		System.out.println("String1 after swapping:: " + str1);
 		System.out.println("String2 after swapping:: " + str2);
-
 	}
 
 	public void m12(String str) {
-		String result = "";
 		String[] sSplit = str.split(" ");
+		String result = "";
 		for (int i = 0; i < sSplit.length; i++) {
 			char ch = Character.toUpperCase(sSplit[i].charAt(0));
 			result += " " + ch + sSplit[i].substring(1);
 		}
-
 		System.out.println("First letter in upper case:: " + result.trim());
 	}
 
@@ -215,14 +207,15 @@ public class Practice_36 implements Cloneable {
 		if (str == null || str.isEmpty()) {
 			return;
 		}
-		str = str.replaceAll("( +)", " ").trim();
+		str = str.replaceAll("\\s+", " ").trim();
+
 		final StringBuilder sb = new StringBuilder(str.length());
-		for (final String words : str.split(" ")) {
-			if (!words.isEmpty()) {
-				sb.append(Character.toUpperCase(words.charAt(0)));
-				sb.append(words.substring(1).toLowerCase());
+		for (final String word : str.split(" ")) {
+			if (!word.isEmpty()) {
+				sb.append(Character.toUpperCase(word.charAt(0)));
+				sb.append(word.substring(1).toLowerCase());
 			}
-			if (!(words.length() == str.length())) {
+			if (!(word.length() == str.length())) {
 				sb.append(" ");
 			}
 		}
@@ -233,16 +226,16 @@ public class Practice_36 implements Cloneable {
 		if (str == null || str.isEmpty()) {
 			return;
 		}
-		str = str.replaceAll("( +)", " ").trim();
-		int index = 2;
+		str = str.replaceAll("\\s+", " ").trim();
+		int index = 1;
 		String[] sSplit = str.split(" ");
-		if (index >= 0 && index < sSplit.length) {
+		if (index > 0 && index <= sSplit.length - 1) {
 			System.out.print("Output is:: ");
 			for (int i = index; i < sSplit.length; i++) {
 				System.out.print(sSplit[i] + " ");
 			}
-			for (int j = 0; j < index; j++) {
-				System.out.print(sSplit[j] + " ");
+			for (int i = 0; i < index; i++) {
+				System.out.print(sSplit[i] + " ");
 			}
 		} else {
 			System.out.println("Invalid Input!!");
@@ -250,8 +243,8 @@ public class Practice_36 implements Cloneable {
 	}
 
 	public void m15(String str) {
-		System.out.println("Occurence of characters in a String:: ");
-		str = str.replaceAll(" ", "").trim();
+
+		str = str.replaceAll("\\s+", "").trim();
 		char[] ch = str.toCharArray();
 		int count = 0;
 		Map<Character, Integer> cMap = new HashMap<>();
@@ -268,11 +261,7 @@ public class Practice_36 implements Cloneable {
 				cMap.put(c, 1);
 			}
 		}
-		Set<Entry<Character, Integer>> entSet = cMap.entrySet();
-		for (Map.Entry<Character, Integer> entMap : entSet) {
-			System.out.println(entMap.getKey() + "=" + entMap.getValue());
-		}
-
+		System.out.println("\nOccurence of characters:: " + cMap);
 	}
 
 	public void m16(String str1, String str2) {
@@ -285,9 +274,7 @@ public class Practice_36 implements Cloneable {
 
 			Arrays.sort(ch1);
 			Arrays.sort(ch2);
-
 			result = Arrays.equals(ch1, ch2);
-
 			if (result) {
 				System.out.println("Strings are anagram!!");
 			} else {
@@ -297,21 +284,22 @@ public class Practice_36 implements Cloneable {
 	}
 
 	public void m17(String str) {
-		String search_String = "us learn";
-		boolean is_Present = str.contains(search_String);
-		System.out.println("is search string present in our string?:: " + is_Present);
-		boolean is_Present2 = str.matches("(.*)" + search_String + "(.*)");
-		System.out.println("is search string present in our string?:: " + is_Present2);
+		String searchString = "this is";
+		boolean is_Present1 = str.contains(searchString);
+		System.out.println("is Search String present in our string:: " + is_Present1);
+
+		boolean is_Present2 = str.matches("().*" + searchString + "(.*)");
+		System.out.println("is Search String present in our string:: " + is_Present2);
 	}
 
 	public void m18(String str) {
-		System.out.println("Only String from rumble jumble:: " + str.replaceAll("[^a-zA-Z]", ""));
-		System.out.println("Only integer from rumble jumble:: " + str.replaceAll("[^0-9]", ""));
-		System.out.println("Only special characters from rumble jumble:: " + str.replaceAll("[a-zA-Z0-9]", ""));
+		System.out.println("Only String:: " + str.replaceAll("[^a-zA-Z]", ""));
+		System.out.println("Only Integer:: " + str.replaceAll("[^0-9]", ""));
+		System.out.println("Only Special characters:: " + str.replaceAll("[a-zA-Z0-9]", ""));
 	}
 
 	public void m19(String[] str) {
-		System.out.println("String array sorted:: ");
+		System.out.println("Sorted String array elements:: ");
 		String temp = null;
 		for (int i = 0; i < str.length; i++) {
 			for (int j = 0; j < str.length - 1; j++) {
@@ -329,43 +317,39 @@ public class Practice_36 implements Cloneable {
 
 	public void m20(String[] str) {
 		System.out.println("Finding duplicate array elements using brute force:: ");
-		int count = 0;
 		for (int i = 0; i < str.length; i++) {
 			for (int j = i + 1; j < str.length; j++) {
 				if (str[i].equals(str[j])) {
 					System.out.println(str[i]);
-					count++;
 				}
 			}
-		}
-		if (count == 0) {
-			System.out.println("No Duplicate elemnet present!!");
 		}
 	}
 
 	public void m21(String[] str) {
 		System.out.println("Finding duplicate array elements using Set:: ");
-		int count = 0;
 		Set<String> sSet = new HashSet<>();
 		for (String s : str) {
 			if (sSet.add(s) == false) {
-				count++;
 				System.out.println(s);
 			}
-		}
-
-		if (count == 0) {
-			System.out.println("No Duplicate elemnet present!!");
 		}
 	}
 
 	public void m22(String[] str) {
 		System.out.println("Finding duplicate array elements using Map:: ");
 		Map<String, Integer> sMap = new HashMap<>();
+		int count = 0;
 		for (String s : str) {
 			if (sMap.containsKey(s)) {
+				if (count < sMap.get(s)) {
+					count = sMap.get(s) + 1;
+				}
 				sMap.put(s, sMap.get(s) + 1);
 			} else {
+				if (count < 1) {
+					count = 1;
+				}
 				sMap.put(s, 1);
 			}
 		}
@@ -375,10 +359,10 @@ public class Practice_36 implements Cloneable {
 				System.out.println(entMap.getKey() + "=" + entMap.getValue());
 			}
 		}
-
 	}
 
 	public void m23(String[] str1, String[] str2) {
+		System.out.println("Only Unique element between two array:: ");
 		List<String> li1 = new ArrayList<String>();
 		List<String> li2 = new ArrayList<String>();
 
@@ -393,57 +377,43 @@ public class Practice_36 implements Cloneable {
 
 		s1.removeAll(s2);
 
-		System.out.println("Only Unique element between two array:: ");
-
 		for (String s : s1) {
 			System.out.println(s);
 		}
 	}
 
 	public void m24(String[] str) {
-		boolean is_Sorted = true;
+		boolean isSorted = true;
 		if (str == null || str.length == 0 || str.length == 1) {
-			is_Sorted = true;
+			isSorted = true;
 		}
 		for (int i = 1; i < str.length; i++) {
 			if (str[i - 1].compareTo(str[i]) > 0) {
-				is_Sorted = false;
+				isSorted = false;
 			}
 		}
-		System.out.println("Is array Sorted?? " + is_Sorted);
+		System.out.println("is Array Sorted:: " + isSorted);
 	}
 
-	public void m25(String[] str) {
-		System.out.println("Occurence of array elements:: ");
-		Map<String, Integer> sMap = new HashMap<>();
-		for (String s : str) {
-			if (sMap.containsKey(s)) {
-				sMap.put(s, sMap.get(s) + 1);
-			} else {
-				sMap.put(s, 1);
-			}
-		}
-		System.out.println(sMap);
-	}
-
-	public void m26(String writeFile) {
+	public void m25(String writeFile) {
 		try {
 			FileWriter fw = new FileWriter(new File("E:\\" + writeFile + ".txt"));
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write("This is the 36th statement from java code.!!!");
+			bw.write("This is the 37th file I'm writing from the code!!");
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+
 		}
 	}
 
-	public void m27(String readline) {
+	public void m26(String readFile) {
 		try {
-			FileReader fr = new FileReader(new File("E:\\" + readline + ".txt"));
+			FileReader fr = new FileReader(new File("E:\\" + readFile + ".txt"));
 			BufferedReader br = new BufferedReader(fr);
-			String sb;
-			while ((sb = br.readLine()) != null) {
-				System.out.println(sb);
+			String str;
+			while ((str = br.readLine()) != null) {
+				System.out.println(str);
 			}
 			br.close();
 		} catch (IOException e) {
@@ -451,83 +421,56 @@ public class Practice_36 implements Cloneable {
 		}
 	}
 
-	public void m28() {
-		int sLength;
-		System.out.println("Enter teh length of an array:: ");
-		Scanner scan = new Scanner(System.in);
-		sLength = scan.nextInt();
-
-		String[] arr = new String[sLength];
-		System.out.println("Enter the array elemnts:: ");
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = scan.next();
-		}
-		System.out.println("Array elements are:: ");
-		for (String s : arr) {
-			System.out.println(s);
+	public void m27(char ch) {
+		System.out.println("Check character is Vowel or Consonant:: ");
+		String s = String.valueOf(ch);
+		if (s.matches("[aeiouAEIOU]")) {
+			System.out.println("Character is vowel!!");
+		} else {
+			System.out.println("Character is not vowel!!");
 		}
 
-	}
-
-	public void m29(String str) {
-		int count = 0;
-		str = str.toLowerCase();
-		char ch[] = str.toCharArray();
-		for (int i = 0; i < ch.length; i++) {
-			if (ch[i] == 'a' || ch[i] == 'e' || ch[i] == 'i' || ch[i] == 'o' || ch[i] == 'u') {
-				count++;
-			}
-		}
-		System.out.println("Number of vowels present in str:: " + count);
 	}
 
 	public static void main(String[] args) {
-		String str1 = "learning";
-		String str2 = "let us learn again us";
-		String str3 = " lEt uS  learn aGAin ";
-		String str4 = "let us learn again new things";
-		String perm = "DEN";
-		String ana1 = "ONLY";
-		String ana2 = "LONY";
+		String str = "java";
+		String str2 = "this is java";
+		String str10 = "this is the string in the java";
+		String str5 = " this		 is java       ";
+		String perm = "JOY";
+		String ana1 = "LOST";
+		String ana2 = "STOL";
 		String random = "Rama75647n&*%&^98656757&^&%%";
 		String[] arr1 = str2.split(" ");
-		String[] arr2 = str4.split(" ");
-		Practice_36 obj1 = new Practice_36();
-		try {
-			Practice_36 obj2 = (Practice_36) obj1.clone();
-			obj2.m1(str1);
-			obj2.m2(str2);
-			obj2.m3(str2);
-			obj2.m4(str2);
-			obj2.m5(str2);
-			obj2.m6(str2);
-			obj2.m7(str2);
-			obj2.m8(str2);
-			System.out.println("Permutation of " + perm + " is: ");
-			obj2.m9("", perm);
-			obj2.m10(str1);
-			obj2.m11(str1, str2);
-			obj2.m12(str2);
-			obj2.m13(str3);
-			obj2.m14(str3);
-			obj2.m15(str2);
-			obj2.m16(ana2, ana1);
-			obj2.m17(str2);
-			obj2.m18(random);
-			obj2.m19(arr1);
-			obj2.m20(arr1);
-			obj2.m21(arr1);
-			obj2.m22(arr1);
-			obj2.m23(arr1, arr2);
-			obj2.m24(arr1);
-			obj2.m25(arr1);
-			obj2.m26("thirtysix");
-			obj2.m27("thirtysix");
-			// obj2.m28();
-			obj2.m29(str4);
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		String[] arr2 = str10.split(" ");
+		Practice_37 obj1 = new Practice_37();
+		obj1.m1(str);
+		obj1.m2(str2);
+		obj1.m3(str2);
+		obj1.m4(str5);
+		obj1.m5(str);
+		obj1.m6(str);
+		obj1.m7(str2);
+		obj1.m8(str2);
+		System.out.println("Permutation of " + perm + " is:: ");
+		obj1.m9("", perm);
+		obj1.m10(str);
+		obj1.m11(str2, str);
+		obj1.m12(str2);
+		obj1.m13(str5);
+		obj1.m14(str5);
+		obj1.m15(str5);
+		obj1.m16(ana1, ana2);
+		obj1.m17(str2);
+		obj1.m18(random);
+		obj1.m19(arr1);
+		obj1.m20(arr2);
+		obj1.m21(arr2);
+		obj1.m22(arr2);
+		obj1.m23(arr1, arr2);
+		obj1.m24(arr2);
+		obj1.m25("37thFile");
+		obj1.m26("37thFile");
+		obj1.m27('U');
 	}
-
 }
